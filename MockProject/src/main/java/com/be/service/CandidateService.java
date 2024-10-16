@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.be.model.Candidate;
@@ -14,8 +17,10 @@ public class CandidateService implements ICandidateService {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public List<Candidate> getAllCandidates() {
-        return candidateRepository.findAll();
+    public List<Candidate> getAllCandidates(Integer page, Integer limit) {
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        Page<Candidate> candidatePage = candidateRepository.findAll(pageable);
+        return candidatePage.getContent();
     }
 
     @Override

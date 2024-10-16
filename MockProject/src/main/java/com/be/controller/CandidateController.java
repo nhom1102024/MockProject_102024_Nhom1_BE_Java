@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.be.model.Candidate;
@@ -24,34 +25,32 @@ public class CandidateController {
     private CandidateService candidateService;
 
     @GetMapping("")
-    public ResponseEntity<List<CandidateResponse>> getAllCandidates() {
-        List<Candidate> candidates = candidateService.getAllCandidates();
+    public ResponseEntity<List<CandidateResponse>> getAllCandidates(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int limit) {
+        List<Candidate> candidates = candidateService.getAllCandidates(page, limit);
 
         List<CandidateResponse> candidateResponses = candidates.stream()
-                .map(CandidateResponse::getCandidate)
+                .map(CandidateResponse::getAllCandidates)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(candidateResponses);
     }
 
     @GetMapping("/{candidateId}")
-    public ResponseEntity<ResponseObject> getCandidateById(@PathVariable Integer candidateId) {
+    public ResponseEntity<?> getCandidateById(@PathVariable Integer candidateId) {
         try {
-            Optional<Candidate> candidateResponse = candidateService.getCandidateByID(candidateId);
-            if (candidateResponse.isEmpty()) {
-                return ResponseEntity.ok(
-                    ResponseObject.builder()
-                            .code(1)
-                            .message("Candidate not found!")
-                            .data(candidateResponse)
-                            .build());
+            Optional<Candidate> candidate = candidateService.getCandidateByID(candidateId);
+            if (candidate.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        ResponseObject.builder()
+                                .code(1)
+                                .message("Candidate not found!")
+                                .build());
             }
-            return ResponseEntity.ok(
-                    ResponseObject.builder()
-                            .code(0)
-                            .message("Get user successfully")
-                            .data(candidateResponse)
-                            .build());
+
+            CandidateResponse candidateResponse = CandidateResponse.getCandidate(candidate.get());
+            return ResponseEntity.ok(candidateResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(
                     ResponseObject.builder()
