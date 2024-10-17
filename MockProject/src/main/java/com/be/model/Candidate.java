@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "candidates")
 public class Candidate {
@@ -44,6 +46,9 @@ public class Candidate {
 
     @Column(nullable = true)
     private String address;
+
+    @Column(name = "candidate_position", nullable = true)
+    private String candidatePosition;
 
     @Column(name = "work_experience", nullable = true)
     private String workExperience;
