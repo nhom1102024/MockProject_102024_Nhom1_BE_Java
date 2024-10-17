@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.be.dto.CandidateStatusDTO;
 import com.be.model.Candidate;
 import com.be.response.CandidateResponse;
 import com.be.response.ResponseObject;
 import com.be.service.CandidateService;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/v1/candidates")
@@ -64,5 +71,47 @@ public class CandidateController {
                             .message("An unexpected error occurred.")
                             .build());
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CandidateResponse>> searchCandidates(
+            @RequestParam("query") String query,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int limit) {
+        List<Candidate> candidates = candidateService.searchCandidates(query, page, limit);
+
+        List<CandidateResponse> candidateResponses = candidates.stream()
+                .map(CandidateResponse::getAllCandidates)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(candidateResponses);
+    }
+
+    @PostMapping("/{candidateId}/status")
+    public ResponseEntity<ResponseObject> updateCandidateStatus(
+            @Valid @RequestBody CandidateStatusDTO candidateStatusDTO,
+            @PathVariable Integer candidateId) {
+                try {
+                    CandidateResponse candidateResponse = candidateService.updateCandidateStatus(candidateId, candidateStatusDTO);
+                    
+                    return ResponseEntity.ok(
+                            ResponseObject.builder()
+                                    .code(0) 
+                                    .message("Success")
+                                    .build()
+                    );
+                } catch (IllegalArgumentException e) {
+                    return ResponseEntity.badRequest().body(
+                            ResponseObject.builder()
+                                    .code(1)
+                                    .message(e.getMessage())
+                                    .build());
+                } catch (Exception e) {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                            ResponseObject.builder()
+                                    .code(1)
+                                    .message("An unexpected error occurred.")
+                                    .build());
+                }
     }
 }
