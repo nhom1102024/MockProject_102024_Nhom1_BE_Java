@@ -7,6 +7,20 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+/**
+ * Employee
+ * 
+ * Version: 1.0
+ * 
+ * Date: 15-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 15-10-2024 thuyhang Create
+ */
 @Getter
 @Entity
 @Table(name = "employee")
