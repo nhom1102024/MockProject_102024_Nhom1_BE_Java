@@ -7,6 +7,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Candidate
+ * 
+ * Version: 1.0
+ * 
+ * Date: 15-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 15-10-2024 thuyhang Create
+ */
 @Getter
 @Setter
 @Entity
@@ -14,7 +28,7 @@ import lombok.Setter;
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer candidates_id;
+    private Integer candidatesId;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
