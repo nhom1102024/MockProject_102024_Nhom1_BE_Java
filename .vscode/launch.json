@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MockProjectApplication<be>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.be.MockProjectApplication",
+            "projectName": "be",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
