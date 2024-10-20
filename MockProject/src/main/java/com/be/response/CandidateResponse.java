@@ -1,13 +1,13 @@
 package com.be.response;
 
-import com.be.model.Candidate;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import lombok.Builder;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import com.be.model.Candidate;
 
 /**
  * CandidateResponse
@@ -33,7 +33,6 @@ public class CandidateResponse {
     private Character gender;
     private String email;
     private String phoneNumber;
-    private String nameCandidates;
     private String dateOfBirth;
     private String address;
     private String candidatePosition;
@@ -45,7 +44,7 @@ public class CandidateResponse {
     public static CandidateResponse getAllCandidates(Candidate candidate) {
         return CandidateResponse.builder()
                 .candidatesId(candidate.getCandidatesId())
-                .nameCandidates(candidate.getNameCandidates())
+                .fullName(candidate.getFullName())
                 .email(candidate.getEmail())
                 .phoneNumber(candidate.getPhoneNumber())
                 .candidatePosition(candidate.getCandidatePosition())

@@ -1,4 +1,4 @@
-package com.be.service;
+package com.be.service.candidate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import com.be.dto.CandidateStatusDTO;
-import com.be.dto.CandidateUpdateDTO;
+import com.be.dto.candidate.CandidateStatusDTO;
+import com.be.dto.candidate.CandidateUpdateDTO;
 import com.be.model.Candidate;
 import com.be.repository.CandidateRepository;
 
@@ -38,19 +38,39 @@ public class CandidateService implements ICandidateService {
     /**
      * get all candidates in table candidates
      * 
+     * @param searchString
      * @param page
      * @param limit
      * @return List<Candidate>
      */
-    public List<Candidate> getAllCandidates(Integer page, Integer limit) {
+    public List<Candidate> getAllCandidates(String searchString, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page - 1, limit);
-        Page<Candidate> candidatePage = candidateRepository.findAllActive(pageable);
+        Page<Candidate> candidatePage;
+        if (searchString == null || searchString.isBlank()) {
+            candidatePage = candidateRepository.findAllActive(pageable);
+        } else {
+            candidatePage = candidateRepository.searchCandidates(searchString, pageable);
+        }
         return candidatePage.getContent();
+    }
+
+    /**
+     * get total of candidates
+     * 
+     * @param searchString
+     * @return total
+     */
+    public int getTotalCandidates(String searchString) {
+        if (searchString != null && !searchString.isBlank()) {
+            return candidateRepository.countBySearchString(searchString);
+        }
+        return candidateRepository.countCandidate(searchString);
     }
 
     /**
      * get candidate by candidatesId
      * 
+     * @param candidatesId
      * @return Optional<Candidate>
      */
     @Override
@@ -59,19 +79,10 @@ public class CandidateService implements ICandidateService {
     }
 
     /**
-     * search candidates by nameCandidates or candidatePosition
-     * 
-     * @return List<Candidate>
-     */
-    @Override
-    public List<Candidate> searchCandidates(String query, Integer page, Integer limit) {
-        Pageable pageable = PageRequest.of(page - 1, limit);
-        Page<Candidate> candidatePage = candidateRepository.searchCandidates(query, pageable);
-        return candidatePage.getContent();
-    }
-
-    /**
      * update candidate status to "processed"
+     * 
+     * @param candidatesId
+     * @param candidateStatusDTO
      */
     @Override
     public void updateCandidateStatus(Integer candidatesId, CandidateStatusDTO candidateStatusDTO) {
@@ -82,6 +93,9 @@ public class CandidateService implements ICandidateService {
 
     /**
      * update candidate at candidatesId
+     * 
+     * @param candidatesId
+     * @param candidateStatusDTO
      */
     @Override
     public void updateCandidate(Integer candidatesId, CandidateUpdateDTO candidateUpdateDTO) {

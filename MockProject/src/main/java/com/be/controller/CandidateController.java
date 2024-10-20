@@ -8,16 +8,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.be.dto.CandidateStatusDTO;
-import com.be.dto.CandidateUpdateDTO;
+import com.be.dto.candidate.CandidateStatusDTO;
+import com.be.dto.candidate.CandidateUpdateDTO;
 import com.be.model.Candidate;
 import com.be.response.CandidateResponse;
 import com.be.response.ResponseObject;
-import com.be.service.CandidateService;
+import com.be.service.candidate.CandidateService;
 
 /**
  * CandidateController
@@ -42,22 +44,32 @@ public class CandidateController {
     /**
      * get all candidates in table candidates
      *
+     * @param searchString
      * @param page
      * @param limit
-     * @return candidateResponses
+     * @return ResponseObject
      */
     @GetMapping("")
-    public ResponseEntity<ResponseObject> getAllCandidate(@RequestParam(defaultValue = "1") int page,
+    public ResponseEntity<ResponseObject> getAllCandidate(@RequestParam(required = false) String searchString,
+                                                          @RequestParam(defaultValue = "1") int page,
                                                           @RequestParam(defaultValue = "10") int limit) {
-        List<Candidate> candidates = candidateService.getAllCandidates(page, limit);
+        List<Candidate> candidates = candidateService.getAllCandidates(searchString, page, limit);
+        int totalCandidates = candidateService.getTotalCandidates(searchString);
         List<CandidateResponse> candidateResponses = candidates.stream()
                 .map(CandidateResponse::getAllCandidates)
                 .collect(Collectors.toList());
+
+        Map<String, Object> pagination = new HashMap<>();
+        pagination.put("page", page);
+        pagination.put("limit", limit);
+        pagination.put("total", totalCandidates);
+
         return ResponseEntity.ok().body(
                 ResponseObject.builder()
                         .status(200)
                         .message("Success")
-                        .data(candidateResponses)
+                        .data(Map.of("candidates", candidateResponses, "pagination",
+                                pagination))
                         .build());
     }
 
@@ -65,7 +77,7 @@ public class CandidateController {
      * get candidate by candidatesId
      *
      * @param candidateId
-     * @return candidateResponse
+     * @return ResponseObject
      */
     @GetMapping("/{candidateId}")
     public ResponseEntity<ResponseObject> getCandidateById(@PathVariable Integer candidateId) {
@@ -88,32 +100,12 @@ public class CandidateController {
     }
 
     /**
-     * search candidates by nameCandidates or candidatePosition
-     *
-     * @param query
-     * @param page
-     * @param limit
-     * @return candidateResponses
-     */
-    @GetMapping("/search")
-    public ResponseEntity<ResponseObject> searchCandidates(@RequestParam String query,
-                                                           @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
-        List<Candidate> candidates = candidateService.searchCandidates(query, page, limit);
-        List<CandidateResponse> candidateResponses = candidates.stream()
-                .map(CandidateResponse::getAllCandidates)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok().body(
-                ResponseObject.builder()
-                        .status(200)
-                        .message("Success")
-                        .data(candidateResponses)
-                        .build());
-    }
-
-    /**
      * update candidate status to "processed"
      *
-     * @return CandidateResponse
+     * @param candidateId
+     * @param candidateStatusDTO
+     * @param bindingResult
+     * @return ResponseObject
      */
     @PostMapping("/{candidateId}/status")
     public ResponseEntity<ResponseObject> updateCandidateStatus(@PathVariable Integer candidateId,
@@ -148,7 +140,10 @@ public class CandidateController {
     /**
      * update candidate
      *
-     * @return CandidateResponse
+     * @param candidateId
+     * @param candidateUpdateDTO
+     * @param bindingResult
+     * @return ResponseObject
      */
     @PutMapping("/{candidateId}")
     public ResponseEntity<ResponseObject> updateCandidate(@PathVariable Integer candidateId,
@@ -180,6 +175,12 @@ public class CandidateController {
         }
     }
 
+    /**
+     * delete candidate
+     *
+     * @param candidateId
+     * @return ResponseObject
+     */
     @DeleteMapping("/{candidateId}")
     public ResponseEntity<ResponseObject> softDeteleCandidate(@PathVariable Integer candidateId) {
         Optional<Candidate> candidate = candidateService.getCandidateByID(candidateId);
