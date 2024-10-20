@@ -1,7 +1,6 @@
 package com.be.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -15,13 +14,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Customer")
-public class Customer {
+@Table(name = "Employee")
+public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
-    private int customer_id;
-    
+    @Column(name = "employee_id")
+    private int employee_id;
+
     private String userName;
 
     private String password;
@@ -29,8 +29,6 @@ public class Customer {
     private String avata;
 
     private String fullName;
-
-    private String role;
 
     private LocalDate dateOfBirth;
 
@@ -40,31 +38,29 @@ public class Customer {
 
     private String phoneNumber;
 
+    private String socialSecurityNumber;
+
     private String email;
 
-    private String occupation;
+    private LocalDate startDate;
+
+    private double salary;
 
     private String status;
 
-    private LocalDateTime deletedAt;
-
     @ManyToOne
-    @JoinColumn(name = "unit_id")
-    private Unit unit;
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-    @ManyToOne
-    @JoinColumn(name = "candidates_id")
-    private Candidates candidate;
+    @OneToMany(mappedBy = "employee")
+    private List<Candidates> candidates;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Bill> bills;
-
-    public int getCustomer_id() {
-        return customer_id;
+    public int getEmployee_id() {
+        return employee_id;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
     }
 
     public String getUserName() {
@@ -99,14 +95,6 @@ public class Customer {
         this.fullName = fullName;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -139,6 +127,14 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+    public void setSocialSecurityNumber(String socialSecurityNumber) {
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -147,12 +143,20 @@ public class Customer {
         this.email = email;
     }
 
-    public String getOccupation() {
-        return occupation;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     public String getStatus() {
@@ -163,22 +167,5 @@ public class Customer {
         this.status = status;
     }
 
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer [customer_id=" + customer_id + ", userName=" + userName + ", password=" + password + ", avata="
-                + avata + ", fullName=" + fullName + ", role=" + role + ", dateOfBirth=" + dateOfBirth + ", gender="
-                + gender + ", address=" + address + ", phoneNumber=" + phoneNumber + ", email=" + email
-                + ", occupation=" + occupation + ", status=" + status + ", deletedAt=" + deletedAt + "]";
-    }
-
-    
     
 }

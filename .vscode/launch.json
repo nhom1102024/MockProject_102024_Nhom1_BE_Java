@@ -1,14 +1,24 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Spring Boot-MockProjectApplication<be>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.be.MockProjectApplication",
-            "projectName": "be",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        }
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-MockProjectApplication<be>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.be.MockProjectApplication",
+      "projectName": "be",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MockProjectApplication<apartmentmanagement>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.be.MockProjectApplication",
+      "projectName": "apartmentmanagement",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
 }
