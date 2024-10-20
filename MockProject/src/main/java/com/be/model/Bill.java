@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.ForeignKey;
 
 @Entity
 @Table(name = "Bill")
@@ -20,22 +21,26 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_id")
-    private int service_id;
+    private int id;
 
     private double amount;
 
+    @Column(name = "duedatetime")
     private LocalDateTime dueDateTime;
 
+    @Column(name = "createddatetime")
     private LocalDateTime createdDateTime;
 
+    @Column(name = "latefee")
     private double lateFee;
 
     private String status;
 
-    private LocalDateTime deletedAt;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "FK_bill_customer"))
+
+
     private Customer customer;
 
     @ManyToOne
@@ -45,13 +50,31 @@ public class Bill {
     @OneToMany(mappedBy = "bill")
     private List<PaymentHistory> paymentHistories;
 
-    public int getService_id() {
-        return service_id;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public List<PaymentHistory> getPaymentHistories() {
+        return paymentHistories;
+    }
+
+    public void setPaymentHistories(List<PaymentHistory> paymentHistories) {
+        this.paymentHistories = paymentHistories;
+    }
+
+
 
     public double getAmount() {
         return amount;
@@ -93,19 +116,19 @@ public class Bill {
         this.status = status;
     }
 
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
+    public int getBill_id() {
+        return id;
     }
 
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
+    public void setBill_id(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Bill [service_id=" + service_id + ", amount=" + amount + ", dueDateTime=" + dueDateTime
-                + ", createdDateTime=" + createdDateTime + ", lateFee=" + lateFee + ", status=" + status
-                + ", deletedAt=" + deletedAt + "]";
+        return "Bill [id=" + id + ", amount=" + amount + ", dueDateTime=" + dueDateTime + ", createdDateTime="
+                + createdDateTime + ", lateFee=" + lateFee + ", status=" + status + ", customer=" + customer
+                + ", service=" + service + ", paymentHistories=" + paymentHistories + "]";
     }
 
     

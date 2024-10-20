@@ -17,12 +17,15 @@ public class Provider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "provider_id")
-    private int provider_id;
+    private int id;
 
+    @Column(name = "nameprovider")
     private String nameProvider;
 
+    @Column(name = "contactperson")
     private String contactPerson;
 
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
     private String email;
@@ -35,11 +38,11 @@ public class Provider {
     private List<Service> services;
 
     public int getProvider_id() {
-        return provider_id;
+        return id;
     }
 
-    public void setProvider_id(int provider_id) {
-        this.provider_id = provider_id;
+    public void setProvider_id(int id) {
+        this.id = id;
     }
 
     public String getNameProvider() {
@@ -92,7 +95,7 @@ public class Provider {
 
     @Override
     public String toString() {
-        return "Provider [provider_id=" + provider_id + ", nameProvider=" + nameProvider + ", contactPerson="
+        return "Provider [id=" + id + ", nameProvider=" + nameProvider + ", contactPerson="
                 + contactPerson + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address
                 + ", status=" + status + "]";
     }

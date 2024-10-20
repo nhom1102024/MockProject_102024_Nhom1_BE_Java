@@ -21,16 +21,19 @@ public class Unit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "unit_id")
-    private int unit_id;
+    private int id;
 
+    @Column(name = "roomnumber")
     private String roomNumber;
 
     private Integer floor;
 
     private Integer area;
 
+    @Column(name = "bedrooms")
     private Integer bedRooms;
 
+    @Column(name = "bathrooms")
     private Integer bathRooms;
 
     private String status;
@@ -39,6 +42,7 @@ public class Unit {
 
     private String description;
 
+    @Column(name = "deleteat")
     private LocalDateTime deleteAt;
 
     @ManyToOne
@@ -49,11 +53,11 @@ public class Unit {
     private List<Customer> customers;
 
     public int getUnit_id() {
-        return unit_id;
+        return id;
     }
 
-    public void setUnit_id(int unit_id) {
-        this.unit_id = unit_id;
+    public void setUnit_id(int id) {
+        this.id = id;
     }
 
     public String getRoomNumber() {
@@ -130,7 +134,7 @@ public class Unit {
 
     @Override
     public String toString() {
-        return "Unit [unit_id=" + unit_id + ", roomNumber=" + roomNumber + ", floor=" + floor + ", area=" + area
+        return "Unit [id=" + id + ", roomNumber=" + roomNumber + ", floor=" + floor + ", area=" + area
                 + ", bedRooms=" + bedRooms + ", bathRooms=" + bathRooms + ", status=" + status + ", price=" + price
                 + ", description=" + description + ", deleteAt=" + deleteAt + "]";
     }

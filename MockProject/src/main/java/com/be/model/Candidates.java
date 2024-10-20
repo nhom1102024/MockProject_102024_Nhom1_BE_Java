@@ -20,24 +20,31 @@ public class Candidates {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "candidates_id")
-    private int  candidates_id;
+    private int  id;
 
+    @Column(name = "namecandidates")
     private String nameCandidates;
 
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
     private String email;
 
     private String status;
 
+    
+    @Column(name = "fullname")
     private String fullName;
 
+    
+    @Column(name = "dateofbirth")
     private LocalDate dateOfBirth;
 
     private Character gender;
 
     private String address;
 
+    @Column(name = "deleteat")
     private LocalDateTime deleteAt;
 
     @ManyToOne
@@ -48,11 +55,11 @@ public class Candidates {
     private List<Customer> customers;
 
     public int getCandidates_id() {
-        return candidates_id;
+        return id;
     }
 
-    public void setCandidates_id(int candidates_id) {
-        this.candidates_id = candidates_id;
+    public void setCandidates_id(int id) {
+        this.id = id;
     }
 
     public String getNameCandidates() {
@@ -129,7 +136,7 @@ public class Candidates {
 
     @Override
     public String toString() {
-        return "Candidates [candidates_id=" + candidates_id + ", nameCandidates=" + nameCandidates + ", phoneNumber="
+        return "Candidates [id=" + id + ", nameCandidates=" + nameCandidates + ", phoneNumber="
                 + phoneNumber + ", email=" + email + ", status=" + status + ", fullName=" + fullName + ", dateOfBirth="
                 + dateOfBirth + ", gender=" + gender + ", address=" + address + ", deleteAt=" + deleteAt + "]";
     }

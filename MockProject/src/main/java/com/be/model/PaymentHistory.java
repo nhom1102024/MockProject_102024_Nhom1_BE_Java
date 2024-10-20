@@ -13,24 +13,29 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PaymentHistory")
+@Table(name = "Paymenthistory")
 public class PaymentHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "paymentHistory_id")
-    private int paymentHistory_id;
+    @Column(name = "paymenthistory_id")
+    private int id;
 
+    @Column(name = "paymentdatetime")
     private LocalDateTime paymentDateTime;
 
+    @Column(name = "amountpaid")
     private double amountPaid;
 
+    @Column(name = "paymentmethod")
     private String paymentMethod;
 
+    @Column(name = "latefee")
     private double lateFee;
 
     private String note;
 
+    @Column(name = "deleteat")
     private LocalDateTime deleteAt;
 
     @ManyToOne
@@ -38,11 +43,27 @@ public class PaymentHistory {
     private Bill bill;
 
     public int getPaymentHistory_id() {
-        return paymentHistory_id;
+        return id;
     }
 
-    public void setPaymentHistory_id(int paymentHistory_id) {
-        this.paymentHistory_id = paymentHistory_id;
+    public void setPaymentHistory_id(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 
     public LocalDateTime getPaymentDateTime() {
@@ -95,7 +116,7 @@ public class PaymentHistory {
 
     @Override
     public String toString() {
-        return "PaymentHistory [paymentHistory_id=" + paymentHistory_id + ", paymentDateTime=" + paymentDateTime
+        return "PaymentHistory [id=" + id + ", paymentDateTime=" + paymentDateTime
                 + ", amountPaid=" + amountPaid + ", paymentMethod=" + paymentMethod + ", lateFee=" + lateFee + ", note="
                 + note + ", deleteAt=" + deleteAt + "]";
     }

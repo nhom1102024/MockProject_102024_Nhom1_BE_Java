@@ -20,28 +20,34 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
-    private int employee_id;
+    private int id;
 
+    @Column(name = "username")
     private String userName;
 
     private String password;
 
     private String avata;
 
+    @Column(name = "fullname")
     private String fullName;
 
+    @Column(name = "dateofbirth")
     private LocalDate dateOfBirth;
 
     private Character gender;
 
     private String address;
 
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
+    @Column(name = "socialsecuritynumber")
     private String socialSecurityNumber;
 
     private String email;
 
+    @Column(name = "startdate")
     private LocalDate startDate;
 
     private double salary;
@@ -56,11 +62,11 @@ public class Employee {
     private List<Candidates> candidates;
 
     public int getEmployee_id() {
-        return employee_id;
+        return id;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployee_id(int id) {
+        this.id = id;
     }
 
     public String getUserName() {

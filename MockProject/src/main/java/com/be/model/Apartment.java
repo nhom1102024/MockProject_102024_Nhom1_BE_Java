@@ -17,12 +17,16 @@ public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "apartment_id")
-    private int apartment_id;
+    private int id;
 
+    @Column(name = "apartmentname")
     private String apartmentName;
     private String location;
+    @Column(name = "buildyear")
     private int buildYear;
+    @Column(name = "numberoffloors")
     private int numberOfFloors;
+    @Column(name = "numberofunits")
     private int numberOfUnits;
     private String status;
 
@@ -30,10 +34,10 @@ public class Apartment {
     private List<Unit> units;
 
     public int getApartment_id() {
-        return apartment_id;
+        return id;
     }
-    public void setApartment_id(int apartment_id) {
-        this.apartment_id = apartment_id;
+    public void setApartment_id(int id) {
+        this.id = id;
     }
     public String getApartmentName() {
         return apartmentName;
@@ -73,7 +77,7 @@ public class Apartment {
     }
     @Override
     public String toString() {
-        return "Customer [apartment_id=" + apartment_id + ", apartmentName=" + apartmentName + ", location=" + location
+        return "Customer [id=" + id + ", apartmentName=" + apartmentName + ", location=" + location
                 + ", buildYear=" + buildYear + ", numberOfFloors=" + numberOfFloors + ", numberOfUnits=" + numberOfUnits
                 + ", status=" + status + "]";
     }

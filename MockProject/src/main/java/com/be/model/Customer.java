@@ -20,24 +20,28 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
-    private int customer_id;
+    private int id;
     
+    @Column(name = "username")
     private String userName;
 
     private String password;
 
     private String avata;
 
+    @Column(name = "fullname")
     private String fullName;
 
     private String role;
 
+    @Column(name = "dateofbirth")
     private LocalDate dateOfBirth;
 
     private Character gender;
 
     private String address;
 
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
     private String email;
@@ -46,6 +50,7 @@ public class Customer {
 
     private String status;
 
+    @Column(name = "deletedat")
     private LocalDateTime deletedAt;
 
     @ManyToOne
@@ -60,11 +65,11 @@ public class Customer {
     private List<Bill> bills;
 
     public int getCustomer_id() {
-        return customer_id;
+        return id;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomer_id(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -173,7 +178,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [customer_id=" + customer_id + ", userName=" + userName + ", password=" + password + ", avata="
+        return "Customer [id=" + id + ", userName=" + userName + ", password=" + password + ", avata="
                 + avata + ", fullName=" + fullName + ", role=" + role + ", dateOfBirth=" + dateOfBirth + ", gender="
                 + gender + ", address=" + address + ", phoneNumber=" + phoneNumber + ", email=" + email
                 + ", occupation=" + occupation + ", status=" + status + ", deletedAt=" + deletedAt + "]";

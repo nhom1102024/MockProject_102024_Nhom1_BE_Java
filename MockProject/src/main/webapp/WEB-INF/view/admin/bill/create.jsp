@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@taglib
-uri="http://www.springframework.org/tags/form" prefix="form" %> <%@ taglib
-prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +13,7 @@ prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     />
     <meta name="description" content="Tuấn Kiệt - Dự án laptopshop" />
     <meta name="author" content="Tuấn Kiệt" />
-    <title>Bill Page</title>
+    <title>User Page</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -38,52 +37,44 @@ prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               <li class="breadcrumb-item active">
                 <a href="/admin/bill">Bills</a>
               </li>
-              <li class="breadcrumb-item active">Update</li>
+              <li class="breadcrumb-item active">Create</li>
             </ol>
             <div class="mt-5">
               <div class="row">
                 <div class="col-md-6 col-12 mx-auto">
-                  <h3>Update a bill</h3>
+                  <h3>Create a bill</h3>
                   <hr />
-
                   <form:form
                     method="post"
-                    action="/admin/bill/update"
+                    action="/admin/bill/create"
                     modelAttribute="newBill"
                     class="row"
                   >
                     <div class="mb-3 col-12">
-                      <label class="form-label"
-                        >Bill id = ${newBill.bill_id}
-                      </label>
+                      <label class="form-label">Customer:</label>
+                      <form:select class="form-select" path="customer.fullName">
+                        <c:forEach var="customer" items="${customers}">
+                          <form:option value="${customer.fullName}"
+                            >${customer.fullName}</form:option
+                          >
+                        </c:forEach>
+                      </form:select>
                     </div>
-                    <div class="mb-3" style="display: none">
-                      <label class="form-label">ID</label>
-                      <form:input
-                        type="text"
-                        class="form-control"
-                        path="bill_id"
-                      />
-                    </div>
-
-                    <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label">Customer ID: </label>
-                      <form:input
-                        type="text"
-                        class="form-control"
-                        path="customer.customer_id"
-                      />
-                    </div>
-                    <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label">Service ID: </label>
-                      <form:input
-                        type="text"
-                        class="form-control"
-                        path="service.service_id"
-                      />
+                    <div class="mb-3 col-12">
+                      <label class="form-label">Service:</label>
+                      <form:select
+                        class="form-select"
+                        path="service.nameService"
+                      >
+                        <c:forEach var="service" items="${services}">
+                          <form:option value="${service.nameService}"
+                            >${service.nameService}</form:option
+                          >
+                        </c:forEach>
+                      </form:select>
                     </div>
                     <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label">Amount: </label>
+                      <label class="form-label">Amount:</label>
                       <form:input
                         type="text"
                         class="form-control"
@@ -91,23 +82,24 @@ prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       />
                     </div>
                     <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label">DueDateTime: </label>
+                      <label class="form-label">DueDateTime:</label>
                       <form:input
-                        type="text"
+                        type="datetime-local"
                         class="form-control"
                         path="dueDateTime"
                       />
                     </div>
                     <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label">CreatedDateTime: </label>
+                      <label class="form-label">CreatedDateTime:</label>
                       <form:input
-                        type="text"
+                        type="datetime-local"
                         class="form-control"
                         path="createdDateTime"
                       />
                     </div>
+
                     <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label">LateFee: </label>
+                      <label class="form-label">LateFee:</label>
                       <form:input
                         type="text"
                         class="form-control"
@@ -121,9 +113,10 @@ prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         <form:option value="Unpaid">Unpaid</form:option>
                       </form:select>
                     </div>
+
                     <div class="col-12 mb-5">
-                      <button type="submit" class="btn btn-warning">
-                        Update
+                      <button type="submit" class="btn btn-primary">
+                        Create
                       </button>
                     </div>
                   </form:form>

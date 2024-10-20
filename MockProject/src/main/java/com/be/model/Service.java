@@ -21,26 +21,33 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
-    private int service_id;
+    private int id;
 
-     private String nameService;
+    @Column(name = "nameservice")
+    private String nameService;
 
     private String description;
 
+    @Column(name = "categoryservice")
     private String categoryService;
 
     private BigDecimal price;
 
     private String duration;
 
+    @Column(name = "contactinformation")
     private String contactInformation;
 
+    @Column(name = "scopeofservices")
     private String scopeOfServices;
 
+    @Column(name = "qualitystandards")
     private String qualityStandards;
 
+    @Column(name = "implementationschedule")
     private String implementationSchedule;
 
+    @Column(name = "deleteat")
     private LocalDateTime deleteAt;
 
     private String status;
@@ -53,11 +60,11 @@ public class Service {
     private List<Bill> bills;
 
     public int getService_id() {
-        return service_id;
+        return id;
     }
 
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
+    public void setService_id(int id) {
+        this.id = id;
     }
 
     public String getNameService() {
@@ -150,7 +157,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service [service_id=" + service_id + ", nameService=" + nameService + ", description=" + description
+        return "Service [id=" + id + ", nameService=" + nameService + ", description=" + description
                 + ", categoryService=" + categoryService + ", price=" + price + ", duration=" + duration
                 + ", contactInformation=" + contactInformation + ", scopeOfServices=" + scopeOfServices
                 + ", qualityStandards=" + qualityStandards + ", implementationSchedule=" + implementationSchedule
