@@ -16,6 +16,12 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
     @Query("SELECT c FROM Candidate c WHERE c.candidatesId = :candidatesId AND c.deleteAt IS NULL")
     Optional<Candidate> findAllActiveById(Integer candidatesId);
 
-    @Query("SELECT c FROM Candidate c WHERE (c.fullName LIKE CONCAT('%', :query, '%') OR c.candidatePosition LIKE CONCAT('%', :query, '%')) AND c.deleteAt IS NULL")
-    Page<Candidate> searchCandidates(String query, Pageable pageable);
+    @Query("SELECT c FROM Candidate c WHERE (c.fullName LIKE CONCAT('%', :searchString, '%') OR c.candidatePosition LIKE CONCAT('%', :searchString, '%')) AND c.deleteAt IS NULL")
+    Page<Candidate> searchCandidates(String searchString, Pageable pageable);
+
+    @Query("SELECT COUNT(c) FROM Candidate c WHERE c.deleteAt IS NULL")
+    int countCandidate(String searchString);
+    
+    @Query("SELECT COUNT(c) FROM Candidate c WHERE (c.fullName LIKE CONCAT('%', :searchString, '%') OR c.candidatePosition LIKE CONCAT('%', :searchString, '%')) AND c.deleteAt IS NULL")
+    int countBySearchString(String searchString);
 }
