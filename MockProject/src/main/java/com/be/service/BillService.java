@@ -3,7 +3,6 @@ package com.be.service;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.be.model.Bill;
 import com.be.model.Customer;
 import com.be.model.PaymentHistory;
@@ -21,59 +20,70 @@ public class BillService {
     private final CustomerRepository customerRepository;
     private final ServiceRepository serviceRepository;
 
-    public BillService(BillRepository billRepository, PaymentHistoryRepository paymentHistoryRepository, CustomerRepository customerRepository, ServiceRepository serviceRepository) {
+    public BillService(BillRepository billRepository, PaymentHistoryRepository paymentHistoryRepository,
+            CustomerRepository customerRepository, ServiceRepository serviceRepository) {
         this.billRepository = billRepository;
         this.paymentHistoryRepository = paymentHistoryRepository;
         this.customerRepository = customerRepository;
         this.serviceRepository = serviceRepository;
     }
 
-    public List<Bill> getAllBills () {
+    // Retrieves a list of all bills
+    public List<Bill> getAllBills() {
         return this.billRepository.findAll();
     }
 
+    // Deletes a bill by its ID and also removes associated payment histories
     public void deleteABill(int id) {
-       Optional <Bill> optionalBill = this.billRepository.findById(id);
-       if(optionalBill.isPresent()) {
-        Bill bill = optionalBill.get();
-        List<PaymentHistory> paymentHistories = bill.getPaymentHistories();
-        if (paymentHistories != null) {
-            for(PaymentHistory paymentHistory : paymentHistories) {
-                this.paymentHistoryRepository.deleteById(paymentHistory.getPaymentHistory_id());
-            }  
+        Optional<Bill> optionalBill = this.billRepository.findById(id);
+        if (optionalBill.isPresent()) {
+            Bill bill = optionalBill.get();
+            List<PaymentHistory> paymentHistories = bill.getPaymentHistories();
+            if (paymentHistories != null) {
+                for (PaymentHistory paymentHistory : paymentHistories) {
+                    this.paymentHistoryRepository.deleteById(paymentHistory.getPaymentHistory_id());
+                }
+            }
+            this.billRepository.deleteById(id);
         }
-        this.billRepository.deleteById(id);
-       }
     }
 
-    public Optional <Bill> getABill(int id) {
+    // Fetches a specific bill by its ID
+    public Optional<Bill> getABill(int id) {
         return this.billRepository.findById(id);
     }
 
+    // Saves or updates a bill in the database
     public Bill handleSaveBill(Bill bill) {
         return this.billRepository.save(bill);
     }
 
+    // Retrieves a specific customer by their ID
     public Optional<Customer> getACustomer(int id) {
         return this.customerRepository.findById(id);
     }
 
+    // Retrieves a specific service by its ID
     public Optional<Service> getAService(int id) {
         return this.serviceRepository.findById(id);
     }
 
+    // Fetches a service by its name
     public Service getServiceByName(String name) {
         return this.serviceRepository.findByNameService(name);
     }
 
+    // Fetches a customer by their full name
     public Customer getCustomerByName(String name) {
         return this.customerRepository.findByFullName(name);
     }
 
+    // Retrieves a list of all customers
     public List<Customer> getAllCustomers() {
         return this.customerRepository.findAll();
     }
 
+    // Retrieves a list of all services
     public List<Service> getAllServices() {
         return this.serviceRepository.findAll();
     }
