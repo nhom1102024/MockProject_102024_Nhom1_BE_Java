@@ -1,184 +1,66 @@
 package com.be.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
+@Getter
+@Setter
 @Entity
-@Table(name = "Customer")
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
-    private int customer_id;
-    
-    @Column(name = "username")
-    private String userName;
-
-    private String password;
-
-    private String avata;
-
-    @Column(name = "fullname")
-    private String fullName;
-
-    private String role;
-    @Column(name = "dateofbirth")
-    private LocalDate dateOfBirth;
-
-    private Character gender;
-
-    private String address;
-    @Column(name = "phonenumber")
-    private String phoneNumber;
-
-    private String email;
-
-    private String occupation;
-
-    private String status;
-    @Column(name = "deletedat")
-    private LocalDateTime deletedAt;
+    private Integer customerId;
 
     @ManyToOne
-    @JoinColumn(name = "unit_id")
+    @JoinColumn(name = "unit_id", referencedColumnName = "unit_id")
     private Unit unit;
 
     @ManyToOne
-    @JoinColumn(name = "candidates_id")
-    private Candidates candidate;
+    @JoinColumn(name = "candidates_id", referencedColumnName = "candidates_id")
+    private Candidate candidate;
 
-  
+    @Column(name = "user_name", nullable = false, unique = true)
+    private String userName;
 
-    public int getCustomer_id() {
-        return customer_id;
-    }
+    @Column(nullable = false)
+    private String password;
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
-    }
+    @Column(nullable = true)
+    private String avata;
 
-    public String getUserName() {
-        return userName;
-    }
+    @Column(name = "full_name")
+    private String fullName;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    @Column(nullable = true)
+    private String role;
 
-    public String getPassword() {
-        return password;
-    }
+    @Column(name = "date_of_birth", nullable = true)
+    private Date dateOfBirth;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @Column(nullable = true)
+    private Character gender;
 
-    public String getAvata() {
-        return avata;
-    }
+    @Column(nullable = true)
+    private String address;
 
-    public void setAvata(String avata) {
-        this.avata = avata;
-    }
+    @Column(name = "phone_number", nullable = true)
+    private String phoneNumber;
 
-    public String getFullName() {
-        return fullName;
-    }
+    @Column(nullable = true)
+    private String email;
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    @Column(nullable = true)
+    private String occupation;
 
-    public String getRole() {
-        return role;
-    }
+    @Column(nullable = true)
+    private String status;
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Character getGender() {
-        return gender;
-    }
-
-    public void setGender(Character gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer [customer_id=" + customer_id + ", userName=" + userName + ", password=" + password + ", avata="
-                + avata + ", fullName=" + fullName + ", role=" + role + ", dateOfBirth=" + dateOfBirth + ", gender="
-                + gender + ", address=" + address + ", phoneNumber=" + phoneNumber + ", email=" + email
-                + ", occupation=" + occupation + ", status=" + status + ", deletedAt=" + deletedAt + "]";
-    }
-
-    
-    
+    @Column(name = "delete_at", nullable = true)
+    private LocalDateTime deleteAt;
 }

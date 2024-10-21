@@ -28,6 +28,7 @@ import lombok.Setter;
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "candidates_id")
     private Integer candidatesId;
 
     @ManyToOne
