@@ -2,7 +2,7 @@ package com.be.controller.staff;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.*;
 import com.be.model.FeedbackEmployee;
-import com.be.service.FeedbackEmployeeServiece;
+import com.be.service.FeedbackEmployeeService;
 import java.util.List;
 
 
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 public class FeedbackEmployeeController {
-    private final FeedbackEmployeeServiece feedbackEmployeeServiece;
+    private final FeedbackEmployeeService feedbackEmployeeServiece;
 
-    public FeedbackEmployeeController(FeedbackEmployeeServiece feedbackEmployeeServiece) {
+    public FeedbackEmployeeController(FeedbackEmployeeService feedbackEmployeeServiece) {
         this.feedbackEmployeeServiece = feedbackEmployeeServiece;
     }
 

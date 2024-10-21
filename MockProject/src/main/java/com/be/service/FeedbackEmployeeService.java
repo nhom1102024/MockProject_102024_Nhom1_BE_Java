@@ -5,20 +5,17 @@ import com.be.model.FeedbackEmployee;
 import com.be.repository.CustomerRepository;
 import com.be.repository.EmployeeRepository;
 import com.be.repository.FeedbackEmployeeRepository;
-
-// import org.apache.el.stream.Optional;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-public class FeedbackEmployeeServiece {
+public class FeedbackEmployeeService {
 
     private final FeedbackEmployeeRepository feedbackEmployeeRepository;
    
     
 
-    public FeedbackEmployeeServiece(FeedbackEmployeeRepository feedbackEmployeeRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
+    public FeedbackEmployeeService(FeedbackEmployeeRepository feedbackEmployeeRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
         this.feedbackEmployeeRepository = feedbackEmployeeRepository;
     }
 
