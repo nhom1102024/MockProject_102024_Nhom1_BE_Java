@@ -1,7 +1,6 @@
 package com.be.service;
 
-import com.be.model.Customer;
-import com.be.model.Employee;
+
 import com.be.model.FeedbackEmployee;
 import com.be.repository.CustomerRepository;
 import com.be.repository.EmployeeRepository;
@@ -14,14 +13,11 @@ import java.util.List;
 public class FeedbackEmployeeServiece {
 
     private final FeedbackEmployeeRepository feedbackEmployeeRepository;
-    private final CustomerRepository customerRepository;
-    private final EmployeeRepository employeeRepository;
+   
     
 
     public FeedbackEmployeeServiece(FeedbackEmployeeRepository feedbackEmployeeRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
         this.feedbackEmployeeRepository = feedbackEmployeeRepository;
-        this.customerRepository = customerRepository;
-        this.employeeRepository = employeeRepository;
     }
 
 
