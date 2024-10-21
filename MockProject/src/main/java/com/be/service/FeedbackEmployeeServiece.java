@@ -1,10 +1,12 @@
 package com.be.service;
 
-
+import java.util.Optional;
 import com.be.model.FeedbackEmployee;
 import com.be.repository.CustomerRepository;
 import com.be.repository.EmployeeRepository;
 import com.be.repository.FeedbackEmployeeRepository;
+
+// import org.apache.el.stream.Optional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,12 +28,22 @@ public class FeedbackEmployeeServiece {
     }
 
     public FeedbackEmployee createFeedbacks(FeedbackEmployee feedbackEmployee) {
-        // Customer customer = this.customerRepository.findById(feedbackEmployee.getCustomer().getCustomer_id()).get();
-        // Employee employee = this.employeeRepository.findById(feedbackEmployee.getEmployee().getEmployee_id()).get();
-        // feedbackEmployee.setCustomer(customer);
-        // feedbackEmployee.setEmployee(employee);
         return feedbackEmployeeRepository.save(feedbackEmployee);
     }
 
-    // Các method khác như update, delete complaint
+    public Optional<FeedbackEmployee> getFeedbackById(Integer id) {
+        return this.feedbackEmployeeRepository.findById(id);
+    }
+
+    public FeedbackEmployee handleSaveFeedback(FeedbackEmployee feedbackEmployee) {
+        return this.feedbackEmployeeRepository.save(feedbackEmployee);
+    }
+
+    public void deleteFeedback(int id) {
+        Optional<FeedbackEmployee> optionalFeedback = this.feedbackEmployeeRepository.findById(id);
+        if (optionalFeedback.isPresent()) {
+            this.feedbackEmployeeRepository.deleteById(id);
+        }
+    }
+
 }

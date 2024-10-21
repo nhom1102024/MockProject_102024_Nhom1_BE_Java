@@ -97,5 +97,14 @@ public class FeedbackEmployee {
     public void setDeleteAt(LocalDateTime deleteAt) {
         this.deleteAt = deleteAt;
     }
+
+    @Override
+    public String toString() {
+        return "FeedbackEmployee [feedbackEmployee_id=" + feedbackEmployee_id + ", customer=" + customer + ", employee="
+                + employee + ", rating=" + rating + ", feedback=" + feedback + ", createdDateTime=" + createdDateTime
+                + ", deleteAt=" + deleteAt + "]";
+    }
+
+    
 }
 
