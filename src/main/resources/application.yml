@@ -1,0 +1,56 @@
+server:
+  http2:
+    enabled: true
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://${SQL_SERVER_ADDRESS}:${SQL_SERVER_PORT};databaseName=${SQL_SERVER_DATABASE};trustServerCertificate=true
+    username: ${SQL_SERVER_USER}
+    password: ${SQL_SERVER_PASSWORD}
+    hikari:
+      pool-name: LeaseMasterHikariPool
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  jta:
+    enabled: false
+
+
+springdoc:
+  show-actuator: true
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    org.springframework: INFO
+    com.lease_master: INFO
+  file:
+    name: logs/lease-master.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+jwt:
+  secretKey: ${JWT_SECRET}
+  issuer: www.seichi.com
+  expirationMinute: 10
+
+swagger:
+  contact-name: Seichi
+  contact-mail: seichi@gmail.com
+  contact-url: https://github.com/cngthnh22112002
+  app-name: Lease Master
+  app-description: "An apartment building application is responsible for operating and maintaining an apartment building efficiently, ensuring the rights of residents and property owners."
+  app-version: 3.3.4
+  app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  app-license: Apache 2.0
