@@ -18,17 +18,21 @@ public class FeedbackEmployeeController {
         this.feedbackEmployeeServiece = feedbackEmployeeServiece;
     }
 
+    // Show FeedbackEmployee
     @GetMapping("/staff/show_feedbacks")
     public List<FeedbackEmployee> getFeedback(){
         List<FeedbackEmployee> feedbackEmployees = this.feedbackEmployeeServiece.getAllFeedbacks();
         return feedbackEmployees;
     }
+    
+    // Create FeedbackEmployee
     @PostMapping("/staff/create_feedbacks")
     public FeedbackEmployee createFeedback(@RequestBody FeedbackEmployee feedbackEmployee ) {
         FeedbackEmployee createdFeedback = feedbackEmployeeServiece.createFeedbacks(feedbackEmployee);
         return createdFeedback;
     }
-    
+
+    // Update FeedbackEmployee
     @PostMapping("/staff/update_feedbacks")
     public FeedbackEmployee postUpdatefeedback(@RequestBody FeedbackEmployee feedbackEmployee) {
         Optional<FeedbackEmployee> feedbackOptional = this.feedbackEmployeeServiece.getFeedbackById(feedbackEmployee.getFeedbackEmployee_id());
@@ -45,7 +49,8 @@ public class FeedbackEmployeeController {
         return feedbackEmployee;
 
     }
-    
+
+    // Delete FeedbackEmployee
     @PostMapping("/staff/delete_feedbacks")
     public String postDeleteFeedback(@RequestBody FeedbackEmployee feedbackEmployee) {
         this.feedbackEmployeeServiece.deleteFeedback(feedbackEmployee.getFeedbackEmployee_id());

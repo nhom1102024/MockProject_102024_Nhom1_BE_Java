@@ -14,15 +14,15 @@ public class AmenitiesService {
     public AmenitiesService(AmenitiesRepository amenitiesRepository) {
         this.amenitiesRepository = amenitiesRepository;
     }
-
+    // Show Amenities
     public List<Amenities> getAllAmenities() {
         return amenitiesRepository.findAll();
     }
-
+    // Create Amenities
     public Amenities createAmenities(Amenities amenities) {
         return amenitiesRepository.save(amenities);
     }
-
+    // Update Amenities
     public Optional<Amenities> getAmenitiesById(Integer id) {
         return this.amenitiesRepository.findById(id);
     }
@@ -30,7 +30,7 @@ public class AmenitiesService {
     public Amenities handleSaveAmenities(Amenities amenities) {
         return this.amenitiesRepository.save(amenities);
     }
-
+    // Delete Amenities
     public void deleteAmenities(int id) {
         Optional<Amenities> optionalAmenities = this.amenitiesRepository.findById(id);
         if (optionalAmenities.isPresent()) {

@@ -13,18 +13,19 @@ public class AmenitiesController {
     public AmenitiesController(AmenitiesService amenitiesService) {
         this.amenitiesService = amenitiesService;
     }
-
+    // Show Amenities
     @GetMapping("/staff/show_amenities")
     public List<Amenities> getAmenities(){
         List<Amenities> amenities = this.amenitiesService.getAllAmenities();
         return amenities;
     }
+    // Create Amenities
     @PostMapping("/staff/create_amenities")
     public Amenities createAmenities(@RequestBody Amenities amenities ) {
         Amenities createAmenities = amenitiesService.createAmenities(amenities);
         return createAmenities;
     }
-    
+    // Update Amenities
     @PostMapping("/staff/update_amenities")
     public Amenities postUpdateAmenities(@RequestBody Amenities amenities) {
         Optional<Amenities> amenitiesOptional = this.amenitiesService.getAmenitiesById(amenities.getAmenities_id());
@@ -40,7 +41,7 @@ public class AmenitiesController {
         return amenities;
 
     }
-    
+    // Delete Amenities
     @PostMapping("/staff/delete_amenities")
     public String postDeleteAmenities(@RequestBody Amenities amenities) {
         this.amenitiesService.deleteAmenities(amenities.getAmenities_id());

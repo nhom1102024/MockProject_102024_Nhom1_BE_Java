@@ -19,15 +19,15 @@ public class FeedbackEmployeeService {
         this.feedbackEmployeeRepository = feedbackEmployeeRepository;
     }
 
-
+    // Show FeedbackEmployee
     public List<FeedbackEmployee> getAllFeedbacks() {
         return feedbackEmployeeRepository.findAll();
     }
-
+    // Create FeedbackEmployee
     public FeedbackEmployee createFeedbacks(FeedbackEmployee feedbackEmployee) {
         return feedbackEmployeeRepository.save(feedbackEmployee);
     }
-
+    // Update FeedbackEmployee
     public Optional<FeedbackEmployee> getFeedbackById(Integer id) {
         return this.feedbackEmployeeRepository.findById(id);
     }
@@ -35,7 +35,7 @@ public class FeedbackEmployeeService {
     public FeedbackEmployee handleSaveFeedback(FeedbackEmployee feedbackEmployee) {
         return this.feedbackEmployeeRepository.save(feedbackEmployee);
     }
-
+    // Delete FeedbackEmployee
     public void deleteFeedback(int id) {
         Optional<FeedbackEmployee> optionalFeedback = this.feedbackEmployeeRepository.findById(id);
         if (optionalFeedback.isPresent()) {
