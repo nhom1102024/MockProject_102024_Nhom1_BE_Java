@@ -1,20 +1,32 @@
 package com.be.dto.customer;
 
-import org.springframework.web.multipart.MultipartFile;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * RequestMaintenanceDTO
+ * 
+ * Version: 1.0
+ * 
+ * Date: 21-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 21-10-2024 thuyhang Create
+ */
 @Getter
 @Setter
 public class RequestMaintenanceDTO {
+    @NotBlank(message = "nameMaintenance must not be blank")
     private String nameMaintenance;
-    private String description;
-    private MultipartFile fileLinkReport;
 
-    public RequestMaintenanceDTO(String nameMaintenance, String description, MultipartFile fileLinkReport) {
-        this.nameMaintenance = nameMaintenance;
-        this.description = description;
-        this.fileLinkReport = fileLinkReport;
-    }
+    @NotBlank(message = "description must not be blank")
+    private String description;
+
+    @NotBlank(message = "fileLinkReport must not be blank")
+    private String fileLinkReport;
 }

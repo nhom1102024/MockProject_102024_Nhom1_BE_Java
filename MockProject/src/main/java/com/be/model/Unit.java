@@ -7,6 +7,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Unit
+ * 
+ * Version: 1.0
+ * 
+ * Date: 21-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 21-10-2024 thuyhang Create
+ */
 @Getter
 @Setter
 @Entity
@@ -35,7 +49,7 @@ public class Unit {
 
     @Column(nullable = true)
     private String status;
-    
+
     private BigDecimal price;
     private String description;
 

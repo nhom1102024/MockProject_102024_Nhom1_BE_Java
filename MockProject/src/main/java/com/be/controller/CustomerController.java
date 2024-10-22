@@ -1,30 +1,62 @@
 package com.be.controller;
 
-import com.be.dto.customer.RequestMaintenanceDTO;
-import com.be.response.ResponseObject;
-import com.be.service.customer.RequestMaintenance;
-import jakarta.validation.constraints.NotBlank;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import jakarta.validation.Valid;
+
+import com.be.dto.customer.RequestMaintenanceDTO;
+import com.be.response.ResponseObject;
+import com.be.service.customer.RequestMaintenanceService;
+
+/**
+ * CustomerController
+ * 
+ * Version: 1.0
+ * 
+ * Date: 21-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 21-10-2024 thuyhang Create
+ */
 @RestController
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
     @Autowired
-    private RequestMaintenance requestMaintenance;
+    private RequestMaintenanceService requestMaintenance;
 
+    /**
+     * request a maintenance
+     * 
+     * @param customerId
+     * @param requestMaintenanceDTO
+     * @param bindingResult
+     * @return ResponseObject
+     */
     @PostMapping("{customerId}/maintenances")
     public ResponseEntity<ResponseObject> requestMaintenance(
             @PathVariable Integer customerId,
-            @RequestParam @NotBlank(message = "nameMaintenance must not be blank") String nameMaintenance,
-            @RequestParam @NotBlank(message = "description must not be blank") String description,
-            @RequestParam MultipartFile fileLinkReport) {
+            @RequestBody @Valid RequestMaintenanceDTO requestMaintenanceDTO,
+            BindingResult bindingResult) {
         try {
-            RequestMaintenanceDTO requestMaintenanceDTO = new RequestMaintenanceDTO(nameMaintenance, description,
-                    fileLinkReport);
+            if (bindingResult.hasErrors()) {
+                List<String> errorMessages = bindingResult.getFieldErrors().stream()
+                        .map(FieldError::getDefaultMessage)
+                        .toList();
+                return ResponseEntity.badRequest().body(
+                        ResponseObject.builder()
+                                .status(400)
+                                .message("Validation error: " + errorMessages)
+                                .build());
+            }
             requestMaintenance.createMaintenanceRequest(customerId, requestMaintenanceDTO);
             return ResponseEntity.ok().body(
                     ResponseObject.builder()

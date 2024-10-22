@@ -23,13 +23,13 @@ import com.be.service.candidate.CandidateService;
 
 /**
  * CandidateController
- * <p>
+ *
  * Version: 1.0
- * <p>
+ *
  * Date: 15-10-2024
- * <p>
+ *
  * Copyright
- * <p>
+ *
  * Modification Logs:
  * DATE AUTHOR DESCRIPTION
  * -------------------------------------
@@ -50,9 +50,10 @@ public class CandidateController {
      * @return ResponseObject
      */
     @GetMapping("")
-    public ResponseEntity<ResponseObject> getAllCandidate(@RequestParam(required = false) String searchString,
-                                                          @RequestParam(defaultValue = "1") int page,
-                                                          @RequestParam(defaultValue = "10") int limit) {
+    public ResponseEntity<ResponseObject> getAllCandidate(
+            @RequestParam(required = false) String searchString,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int limit) {
         List<Candidate> candidates = candidateService.getAllCandidates(searchString, page, limit);
         int totalCandidates = candidateService.getTotalCandidates(searchString);
         List<CandidateResponse> candidateResponses = candidates.stream()
@@ -108,8 +109,10 @@ public class CandidateController {
      * @return ResponseObject
      */
     @PostMapping("/{candidateId}/status")
-    public ResponseEntity<ResponseObject> updateCandidateStatus(@PathVariable Integer candidateId,
-                                                                @RequestBody @Valid CandidateStatusDTO candidateStatusDTO, BindingResult bindingResult) {
+    public ResponseEntity<ResponseObject> updateCandidateStatus(
+            @PathVariable Integer candidateId,
+            @RequestBody @Valid CandidateStatusDTO candidateStatusDTO,
+            BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 List<String> errorMessages = bindingResult.getFieldErrors().stream()
@@ -146,8 +149,10 @@ public class CandidateController {
      * @return ResponseObject
      */
     @PutMapping("/{candidateId}")
-    public ResponseEntity<ResponseObject> updateCandidate(@PathVariable Integer candidateId,
-                                                          @RequestBody @Valid CandidateUpdateDTO candidateUpdateDTO, BindingResult bindingResult) {
+    public ResponseEntity<ResponseObject> updateCandidate(
+            @PathVariable Integer candidateId,
+            @RequestBody @Valid CandidateUpdateDTO candidateUpdateDTO,
+            BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 List<String> errorMessages = bindingResult.getFieldErrors().stream()
