@@ -1,99 +1,58 @@
 package com.be.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
-
+/**			
+ * Device			
+ *			
+ * Version 1.0			
+ *			
+ * Date: 20-10-2024			
+ *			
+ * Copyright 			
+ *			
+ * Modification Logs:			
+ * DATE                 AUTHOR          DESCRIPTION			
+ * -----------------------------------------------------------------------			
+ * 20-10-2024         ThanhGiang            Create			
+ */	
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "Device")
+@Table(name = "device")
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long deviceId;
 
     @ManyToOne
-    @JoinColumn(name = "provider_id")
+    @JoinColumn(name = "provider_id", nullable = false)
     private Provider provider;
 
     @ManyToOne
-    @JoinColumn(name = "categoryDevice_id")
+    @JoinColumn(name = "categoryDevice_id", nullable = false)
     private CategoryDevice categoryDevice;
 
+    @NotBlank(message = "Name is required")
     private String nameDevice;
+
     private String description;
+
+    @NotNull(message = "Price is required")
     private BigDecimal price;
     private String warrantyPeriod;
     private String status;
     private LocalDateTime deleteAt;
-
-    public Device() {}
-
-    public Device(Provider provider, CategoryDevice categoryDevice, String nameDevice, String description, BigDecimal price, String warrantyPeriod, String status) {
-        this.provider = provider;
-        this.categoryDevice = categoryDevice;
-        this.nameDevice = nameDevice;
-        this.description = description;
-        this.price = price;
-        this.warrantyPeriod = warrantyPeriod;
-        this.status = status;
-    }
-
-    public Long getDeviceId() {
-        return deviceId;
-    }
-    public Provider getProvider() {
-        return provider;
-    }
-    public CategoryDevice getCategoryDevice() {
-        return categoryDevice;
-    }
-    public String getNameDevice() {
-        return nameDevice;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public BigDecimal getPrice() {
-        return price;
-    }
-    public String getWarrantyPeriod() {
-        return warrantyPeriod;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public LocalDateTime getDeleteAt() {
-        return deleteAt;
-    }
-    public void setDeviceId(Long deviceId) {
-        this.deviceId = deviceId;
-    }
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-    public void setCategoryDevice(CategoryDevice categoryDevice) {
-        this.categoryDevice = categoryDevice;
-    }
-    public void setNameDevice(String nameDevice) {
-        this.nameDevice = nameDevice;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-    public void setWarrantyPeriod(String warrantyPeriod) {
-        this.warrantyPeriod = warrantyPeriod;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public void setDeleteAt(LocalDateTime deleteAt) {
-        this.deleteAt = deleteAt;
-    }
-    
-    
-
 }

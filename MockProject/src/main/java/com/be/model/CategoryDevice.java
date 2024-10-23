@@ -1,9 +1,30 @@
 package com.be.model;
 
-
 import jakarta.persistence.*;
-import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**			
+ * CategoryDevice			
+ *			
+ * Version 1.0			
+ *			
+ * Date: 20-10-2024			
+ *			
+ * Copyright 			
+ *			
+ * Modification Logs:			
+ * DATE                 AUTHOR          DESCRIPTION			
+ * -----------------------------------------------------------------------			
+ * 20-10-2024         ThanhGiang            Create			
+ */	
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "CategoryDevice")
 public class CategoryDevice {
@@ -13,33 +34,4 @@ public class CategoryDevice {
 
     private String nameCategoryDevice;
     private String description;
-
-    @OneToMany(mappedBy = "categoryDevice")
-    private List<Device> devices;
-    
-    public Long getCategoryDeviceId() {
-        return categoryDeviceId;
-    }
-
-    public String getNameCategoryDevice() {
-        return nameCategoryDevice;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setCategoryDeviceId(Long categoryDeviceId) {
-        this.categoryDeviceId = categoryDeviceId;
-    }
-
-    public void setNameCategoryDevice(String nameCategoryDevice) {
-        this.nameCategoryDevice = nameCategoryDevice;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    
 }
