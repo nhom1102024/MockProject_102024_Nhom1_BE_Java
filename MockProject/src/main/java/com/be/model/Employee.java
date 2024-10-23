@@ -1,171 +1,77 @@
 package com.be.model;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
 
+/**
+ * Employee
+ * 
+ * Version: 1.0
+ * 
+ * Date: 15-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 15-10-2024 thuyhang Create
+ */
+@Getter
 @Entity
-@Table(name = "Employee")
+@Table(name = "employee")
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
-    private int employee_id;
-    @Column(name = "username")
-    private String userName;
-
-    private String password;
-
-    private String avata;
-    @Column(name = "fullname")
-    private String fullName;
-    @Column(name = "dateofbirth")
-    private LocalDate dateOfBirth;
-
-    private Character gender;
-
-    private String address;
-    @Column(name = "phonenumber")
-    private String phoneNumber;
-    @Column(name = "socialsecuritynumber")
-    private String socialSecurityNumber;
-
-    private String email;
-    @Column(name = "startdate")
-    private LocalDate startDate;
-
-    private double salary;
-
-    private String status;
+    private Integer employee_id;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Candidates> candidates;
+    @Column(name = "user_name", nullable = false, unique = true)
+    private String userName;
 
-    public int getEmployee_id() {
-        return employee_id;
-    }
+    @Column(nullable = false)
+    private String password;
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
-    }
+    @Column(nullable = true)
+    private String avata;
 
-    public String getUserName() {
-        return userName;
-    }
+    @Column(name = "full_name", nullable = true)
+    private String fullName;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    @Column(name = "date_of_birth", nullable = true)
+    private Date dateOfBirth;
 
-    public String getPassword() {
-        return password;
-    }
+    @Column(nullable = true)
+    private Character gender;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @Column(nullable = true)
+    private String address;
 
-    public String getAvata() {
-        return avata;
-    }
+    @Column(name = "phone_number", nullable = true)
+    private String phoneNumber;
 
-    public void setAvata(String avata) {
-        this.avata = avata;
-    }
+    @Column(name = "social_security_number", nullable = true)
+    private String socialSecurityNumber;
 
-    public String getFullName() {
-        return fullName;
-    }
+    @Column(nullable = true)
+    private String email;
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    @Column(name = "start_date", nullable = true)
+    private Date startDate;
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
+    @Column(nullable = true)
+    private BigDecimal salary;
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+    @Column(nullable = true)
+    private String status;
 
-    public Character getGender() {
-        return gender;
-    }
-
-    public void setGender(Character gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getSocialSecurityNumber() {
-        return socialSecurityNumber;
-    }
-
-    public void setSocialSecurityNumber(String socialSecurityNumber) {
-        this.socialSecurityNumber = socialSecurityNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    
+    @Column(name = "delete_at", nullable = true)
+    private LocalDateTime deleteAt;
 }
