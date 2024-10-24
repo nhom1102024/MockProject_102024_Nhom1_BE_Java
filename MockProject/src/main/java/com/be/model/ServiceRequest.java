@@ -15,15 +15,15 @@ public class ServiceRequest {
     @Column(name = "service_request_id")
     private Integer serviceRequestId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id",referencedColumnName = "customer_id") 
     private Customer customer; 
 
-    @ManyToOne 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) 
     @JoinColumn(name = "employee_id",referencedColumnName = "employee_id")
     private Employee employee; 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_id",referencedColumnName = "service_id")
     private Service service; 
 
@@ -33,7 +33,6 @@ public class ServiceRequest {
     private LocalDateTime completionDateTime;
     private LocalDateTime deleteAt;
 
-    // Getters and Setters
     public Integer getServiceRequestId() {
         return serviceRequestId;
     }

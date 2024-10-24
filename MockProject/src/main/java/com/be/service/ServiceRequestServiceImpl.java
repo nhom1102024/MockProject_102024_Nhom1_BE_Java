@@ -1,51 +1,54 @@
 package com.be.service;
 
 import java.util.List;
-import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.be.model.ServiceRequest;
 import com.be.repository.ServiceRequestRespository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ServiceRequestServiceImpl implements ServiceRequestService {
 
-    @Autowired
     private final ServiceRequestRespository serviceRequestRepository;
 
-    
+    @Autowired
     public ServiceRequestServiceImpl(ServiceRequestRespository serviceRequestRepository) {
         this.serviceRequestRepository = serviceRequestRepository;
     }
 
     @Override
     public List<ServiceRequest> getAllService() {
-        return serviceRequestRepository.findAll();
+        return serviceRequestRepository.findAll();  
     }
+
     @Override
     public ServiceRequest createServiceRequest(ServiceRequest serviceRequest) {
-        return serviceRequestRepository.save(serviceRequest); // Sử dụng instance để gọi phương thức save
+        return serviceRequestRepository.save(serviceRequest);
     }
 
     @Override
-    public Optional<ServiceRequest> getServiceRequestById(Integer id) {
-        return serviceRequestRepository.findById(id);
+    public ServiceRequest getServiceRequestById(Integer id) {
+        return serviceRequestRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Service request not found with id: " + id));
     }
 
     @Override
-    public Optional<ServiceRequest> updateServiceRequest(Integer id, ServiceRequest updatedServiceRequest) {
-        if (serviceRequestRepository.existsById(id)) {
-            updatedServiceRequest.setServiceRequestId(id); // Set ID cho đối tượng mới
-            return Optional.of(serviceRequestRepository.save(updatedServiceRequest));
+    public ServiceRequest updateServiceRequest(Integer id, ServiceRequest updatedServiceRequest) {
+        if (!serviceRequestRepository.existsById(id)) {
+            throw new EntityNotFoundException("Service request not found with id: " + id);
         }
-        return Optional.empty();
+        updatedServiceRequest.setServiceRequestId(id);
+        return serviceRequestRepository.save(updatedServiceRequest);
     }
 
     @Override
     public void deleteServiceRequest(Integer id) {
+        if (!serviceRequestRepository.existsById(id)) {
+            throw new RuntimeException("Service request not found with id: " + id);
+        }
         serviceRequestRepository.deleteById(id);
     }
 }

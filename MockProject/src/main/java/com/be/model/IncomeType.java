@@ -27,9 +27,6 @@ public class IncomeType {
     private String incomeTypeName; 
 
     @Column(name="description")
-    private String description;
-
-
-    
+    private String description; 
 
 }

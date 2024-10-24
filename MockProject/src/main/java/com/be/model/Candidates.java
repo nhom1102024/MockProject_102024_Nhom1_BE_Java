@@ -23,8 +23,8 @@ public class Candidates {
     @Column(name = "candidates_id")
     private Integer candidatesId;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false) // Added nullable = false to enforce foreign key constraint
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", nullable = false)
     private Employee employee; 
 
     @Column(name = "name_candidates")
