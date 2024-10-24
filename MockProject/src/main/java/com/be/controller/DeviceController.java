@@ -2,6 +2,7 @@ package com.be.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.be.dto.DeviceDTO;
@@ -43,8 +45,11 @@ public class DeviceController {
      * @return
      */
      @GetMapping
-     public List<Device> getNonDeletedDevices() {
-         return deviceService.getNonDeletedDevices();
+     public List<Device> searchDevice(@RequestParam(name = "name", required = false) String name){
+         if(Objects.isNull(name)){
+            return deviceService.getNonDeletedDevices();
+         }
+         return deviceService.searchDevice(name);
      }
 
      /**

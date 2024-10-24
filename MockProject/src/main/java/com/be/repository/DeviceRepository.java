@@ -25,12 +25,18 @@ import com.be.model.Device;
  */	
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Long>{
-     @Query("SELECT d FROM Device d WHERE d.deleteAt IS NULL")
-     List<Device> findByDeletedAtIsNull();
+      @Query("SELECT d FROM Device d WHERE d.deleteAt IS NULL")
+      List<Device> findByDeletedAtIsNull();
 
-     @Query("SELECT d FROM Device d WHERE d.deleteAt IS NOT NULL")
-     List<Device> findByDeletedAtIsNotNull();
+      @Query("SELECT d FROM Device d WHERE d.deleteAt IS NOT NULL")
+      List<Device> findByDeletedAtIsNotNull();
 
-     @Query("SELECT d FROM Device d WHERE d.provider.nameProvider = :nameProvider")
-     List<Device> findByProviderName(@Param("nameProvider") String providerName);
+      @Query("SELECT d FROM Device d WHERE d.provider.nameProvider = :nameProvider")
+      List<Device> findByProviderName(@Param("nameProvider") String providerName);
+ 
+      @Query("SELECT d FROM Device d WHERE d.nameDevice = :nameDevice")
+      List<Device> findByDeviceName(@Param("nameDevice") String nameDevice);
+
+      List<Device> findByNameDeviceContainingIgnoreCase(String nameDevice);
+
 }

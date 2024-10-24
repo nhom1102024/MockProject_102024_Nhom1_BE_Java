@@ -1,43 +1,33 @@
 package com.be.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-/**			
- * Role			
- *			
- * Version 1.0			
- *			
- * Date: 20-10-2024			
- *			
- * Copyright 			
- *			
- * Modification Logs:			
- * DATE                 AUTHOR          DESCRIPTION			
- * -----------------------------------------------------------------------			
- * 20-10-2024         ThanhGiang            Create			
- */	
-@NoArgsConstructor
-@AllArgsConstructor
+/**
+ * Role
+ * 
+ * Version: 1.0
+ * 
+ * Date: 15-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 15-10-2024 thuyhang Create
+ */
 @Getter
-@Setter
 @Entity
 @Table(name = "role")
 public class Role {
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     @Column(name = "role_id")
-     private Integer roleId;
-     
-     private String roleName;
-     private String description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer role_id;
+
+    @Column(name = "roleName", nullable = true, unique = true)
+    private String roleName;
+
+    @Column(nullable = true)
+    private String description;
 }

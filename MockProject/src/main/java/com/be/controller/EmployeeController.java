@@ -39,7 +39,7 @@ public class EmployeeController {
      * @return
      */  
      @PutMapping("/profile/{id}")
-     public Employee updateEmployee (@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO){
+     public Employee updateEmployee (@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO){
          Employee employee = employeeService.updatEmployeeProfile(id, employeeDTO);
          return employee;
      }

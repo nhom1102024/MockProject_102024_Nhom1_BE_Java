@@ -146,4 +146,9 @@ public class DeviceService {
          deviceRepository.save(device);
          return device;
      }
+
+     public List<Device> searchDevice(String nameDevice){
+         List<Device> devices = deviceRepository.findByNameDeviceContainingIgnoreCase(nameDevice);
+         return devices;
+     }
 }   

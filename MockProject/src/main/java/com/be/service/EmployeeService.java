@@ -33,7 +33,7 @@ public class EmployeeService {
      * @param employeeDTO
      * @return
      */  
-     public Employee updatEmployeeProfile(Long id, EmployeeDTO employeeDTO){
+     public Employee updatEmployeeProfile(Integer id, EmployeeDTO employeeDTO){
          Employee employee = employeeRepository.findById(id)
              .orElseThrow(() -> new CustomRuntimeException("Employ not found"));
              employee.setUserName(employeeDTO.getUsername());
@@ -44,7 +44,7 @@ public class EmployeeService {
              }
     
              employee.setPassword(employeeDTO.getPassword());
-             employee.setDayOfBirth(employeeDTO.getDayOfBirth());
+             employee.setDateOfBirth(employeeDTO.getDayOfBirth());
              employee.setAddress(employeeDTO.getAddress());
              employee.setPhoneNumber(employeeDTO.getPhoneNumber());
 
