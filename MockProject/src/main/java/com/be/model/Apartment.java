@@ -2,40 +2,30 @@ package com.be.model;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**			
- * Apartment			
- *			
- * Version 1.0			
- *			
- * Date: 20-10-2024			
- *			
- * Copyright 			
- *			
- * Modification Logs:			
- * DATE                 AUTHOR          DESCRIPTION			
- * -----------------------------------------------------------------------			
- * 20-10-2024         ThanhGiang            Create			
- */	
-@NoArgsConstructor
-@AllArgsConstructor
+/**
+ * Apartment
+ * 
+ * Version: 1.0
+ * 
+ * Date: 21-10-2024
+ * 
+ * Copyright
+ * 
+ * Modification Logs:
+ * DATE AUTHOR DESCRIPTION
+ * -------------------------------------
+ * 21-10-2024 thuyhang Create
+ */
 @Getter
 @Setter
 @Entity
 @Table(name = "apartment")
 public class Apartment {
-      @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "apartment_id")
     private Integer apartmentId;
