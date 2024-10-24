@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Employee
@@ -23,7 +22,6 @@ import lombok.Setter;
  * 15-10-2024 thuyhang Create
  */
 @Getter
-@Setter
 @Entity
 @Table(name = "employee")
 public class Employee {
