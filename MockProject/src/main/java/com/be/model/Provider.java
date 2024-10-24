@@ -33,6 +33,7 @@ public class Provider {
     @Column(name = "provider_id")
     private Long providerId;
 
+    @Column(name = "nameprovider")
     private String nameProvider;
     private String contactPerson;
     private String phoneNumber;
