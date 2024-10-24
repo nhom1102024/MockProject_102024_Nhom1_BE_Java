@@ -1,11 +1,11 @@
 package com.be.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.be.model.Employee;
+import com.be.model.ServiceRequest;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    
+public interface ServiceRequestRespository extends JpaRepository<ServiceRequest,Integer>{
+
 }

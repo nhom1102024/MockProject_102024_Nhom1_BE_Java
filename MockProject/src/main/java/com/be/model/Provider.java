@@ -30,6 +30,7 @@ import lombok.Setter;
 public class Provider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "provider_id")
     private Long providerId;
 
     private String nameProvider;

@@ -1,7 +1,9 @@
 package com.be.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Role
@@ -17,6 +19,8 @@ import lombok.Getter;
  * -------------------------------------
  * 15-10-2024 thuyhang Create
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "role")

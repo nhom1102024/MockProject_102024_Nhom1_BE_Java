@@ -3,7 +3,9 @@ package com.be.model;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -20,6 +22,8 @@ import lombok.Setter;
  * -------------------------------------
  * 21-10-2024 thuyhang Create
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
