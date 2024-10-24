@@ -37,6 +37,4 @@ public class Income {
 
     @Column(name = "received_date_time", nullable = false)
     private LocalDateTime receivedDateTime;
-
-   
 }

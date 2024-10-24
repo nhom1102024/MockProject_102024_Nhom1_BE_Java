@@ -1,6 +1,5 @@
 package com.be.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,8 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-
-
 
 @Entity
 @Table(name = "Feedbackemployee")
@@ -51,8 +48,6 @@ public class FeedbackEmployee {
     public Customer getCustomer() {
         return customer;
     }
-
-    
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -104,7 +99,6 @@ public class FeedbackEmployee {
                 + employee + ", rating=" + rating + ", feedback=" + feedback + ", createdDateTime=" + createdDateTime
                 + ", deleteAt=" + deleteAt + "]";
     }
-
     
 }
 
