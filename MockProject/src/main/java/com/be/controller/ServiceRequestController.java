@@ -70,7 +70,7 @@ public class ServiceRequestController {
 
     private ServiceRequestResponseDto createResponseDto(ServiceRequest serviceRequest) {
         Integer customerId = (serviceRequest.getCustomer() != null) ? serviceRequest.getCustomer().getCustomerId() : null;
-        Integer employeeId = (serviceRequest.getEmployee() != null) ? serviceRequest.getEmployee().getEmployeeId() : null;
+        Integer employeeId = (serviceRequest.getEmployee() != null) ? serviceRequest.getEmployee().getEmployee_id() : null;
         Integer serviceId = (serviceRequest.getService() != null) ? serviceRequest.getService().getServiceId() : null;
 
         return new ServiceRequestResponseDto(

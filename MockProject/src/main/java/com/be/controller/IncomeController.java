@@ -94,7 +94,7 @@ public class IncomeController {
     }
 
     private IncomeResponseDto createResponseDto(Income income) {
-        Integer employeeId = (income.getEmployee() != null) ? income.getEmployee().getEmployeeId() : null;
+        Integer employeeId = (income.getEmployee() != null) ? income.getEmployee().getEmployee_id() : null;
         Integer incomeTypeId = (income.getIncomeType() != null) ? income.getIncomeType().getIncomeTypeId() : null;
 
         return new IncomeResponseDto(
