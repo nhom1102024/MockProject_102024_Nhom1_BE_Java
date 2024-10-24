@@ -53,11 +53,11 @@
 
                           <div class="mb-3 col-12 col-md-6">
                             <label class="form-label">Customer ID: </label>
-                            <form:input type="text" class="form-control" path="customer.customer_id" />
+                            <form:input type="text" class="form-control" path="customer.customerId" />
                           </div>
                           <div class="mb-3 col-12 col-md-6">
                             <label class="form-label">Service ID: </label>
-                            <form:input type="text" class="form-control" path="service.service_id" />
+                            <form:input type="text" class="form-control" path="service.serviceId" />
                           </div>
                           <div class="mb-3 col-12 col-md-6">
                             <label class="form-label">Amount: </label>
