@@ -17,11 +17,11 @@ public class ServiceRequest {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id",referencedColumnName = "customer_id") 
-    private Customer customer; 
+    private CustomerEntity customer; 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) 
     @JoinColumn(name = "employee_id",referencedColumnName = "employee_id")
-    private Employee employee; 
+    private EmployeeEntity employee; 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_id",referencedColumnName = "service_id")
@@ -41,19 +41,19 @@ public class ServiceRequest {
         this.serviceRequestId = serviceRequestId;
     }
 
-    public Customer getCustomer() {
+    public CustomerEntity getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerEntity customer) {
         this.customer = customer;
     }
 
-    public Employee getEmployee() {
+    public EmployeeEntity getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeEntity employee) {
         this.employee = employee;
     }
 

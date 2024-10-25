@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.be.dto.EmployeeDTO;
-import com.be.model.Employee;
 import com.be.model.EmployeeEntity;
 import com.be.service.EmployeeService;
 

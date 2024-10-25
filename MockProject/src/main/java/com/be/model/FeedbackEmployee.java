@@ -21,12 +21,12 @@ public class FeedbackEmployee {
     // Many-to-One relation with Customer
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    private Customer customer;
+    private CustomerEntity customer;
 
     // Many-to-One relation with Employee
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    private Employee employee;
+    private EmployeeEntity employee;
 
     private int rating;
 
@@ -45,19 +45,19 @@ public class FeedbackEmployee {
         this.feedbackEmployee_id = feedbackEmployee_id;
     }
 
-    public Customer getCustomer() {
+    public CustomerEntity getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerEntity customer) {
         this.customer = customer;
     }
 
-    public Employee getEmployee() {
+    public EmployeeEntity getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeEntity employee) {
         this.employee = employee;
     }
 

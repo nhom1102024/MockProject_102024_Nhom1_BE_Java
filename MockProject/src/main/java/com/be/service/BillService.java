@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.be.model.Bill;
-import com.be.model.Customer;
 import com.be.model.CustomerEntity;
 import com.be.model.PaymentHistory;
 import com.be.model.Service;

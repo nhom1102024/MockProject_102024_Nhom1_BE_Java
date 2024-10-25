@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.be.model.Bill;
-import com.be.model.Customer;
 import com.be.model.CustomerEntity;
 import com.be.model.Service;
 import com.be.service.BillService;

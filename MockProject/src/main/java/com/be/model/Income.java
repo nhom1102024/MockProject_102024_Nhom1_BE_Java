@@ -23,7 +23,7 @@ public class Income {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    private Employee employee;
+    private EmployeeEntity employee;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "income_type_id", referencedColumnName = "income_type_id", nullable = false)

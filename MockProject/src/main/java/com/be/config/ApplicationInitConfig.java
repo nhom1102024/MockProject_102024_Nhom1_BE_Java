@@ -1,4 +1,4 @@
-package com.be.configuration;
+package com.be.config;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;

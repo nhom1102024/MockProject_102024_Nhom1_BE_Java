@@ -33,7 +33,7 @@ public class Candidate {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    private Employee employee;
+    private EmployeeEntity employee;
 
     @Column(name = "name_candidates", nullable = true)
     private String nameCandidates;

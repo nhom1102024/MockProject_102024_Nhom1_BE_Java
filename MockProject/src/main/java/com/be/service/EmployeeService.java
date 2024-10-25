@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.be.dto.EmployeeDTO;
 import com.be.exception.CustomRuntimeException;
-import com.be.model.Employee;
 import com.be.model.EmployeeEntity;
 import com.be.repository.EmployeeRepository;
 

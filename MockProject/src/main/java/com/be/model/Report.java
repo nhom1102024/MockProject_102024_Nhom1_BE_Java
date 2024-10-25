@@ -35,7 +35,7 @@ public class Report {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    private Employee employee;
+    private EmployeeEntity employee;
 
     private String title;
     private String information;

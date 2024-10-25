@@ -7,7 +7,6 @@ import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 
 import com.be.dto.customer.RequestMaintenanceDTO;
-import com.be.model.Customer;
 import com.be.model.CustomerEntity;
 import com.be.model.Report;
 import com.be.repository.CustomerRepository;
