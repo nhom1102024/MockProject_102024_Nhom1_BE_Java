@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.be.model.Bill;
 import com.be.model.Customer;
+import com.be.model.CustomerEntity;
 import com.be.model.PaymentHistory;
 import com.be.model.Service;
 import com.be.repository.BillRepository;
@@ -59,7 +60,7 @@ public class BillService {
     }
 
     // Retrieves a specific customer by their ID
-    public Optional<Customer> getACustomer(int id) {
+    public Optional<CustomerEntity> getACustomer(int id) {
         return this.customerRepository.findById(id);
     }
 
@@ -74,12 +75,12 @@ public class BillService {
     }
 
     // Fetches a customer by their full name
-    public Customer getCustomerByName(String name) {
+    public CustomerEntity getCustomerByName(String name) {
         return this.customerRepository.findByFullName(name);
     }
 
     // Retrieves a list of all customers
-    public List<Customer> getAllCustomers() {
+    public List<CustomerEntity> getAllCustomers() {
         return this.customerRepository.findAll();
     }
 

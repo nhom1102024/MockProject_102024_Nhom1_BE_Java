@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.be.model.Bill;
 import com.be.model.Customer;
+import com.be.model.CustomerEntity;
 import com.be.model.Service;
 import com.be.service.BillService;
 
@@ -65,7 +66,7 @@ public class BillController {
         Optional<Bill> billOptional = this.billService.getABill(bill.getBill_id());
         if (billOptional.isPresent()) {
             Bill currentBill = billOptional.get();
-            Customer customer = this.billService.getACustomer(bill.getCustomer().getCustomerId()).get();
+            CustomerEntity customer = this.billService.getACustomer(bill.getCustomer().getCustomerId()).get();
             Service service = this.billService.getAService(bill.getService().getServiceId()).get();
             currentBill.setCustomer(customer);
             currentBill.setService(service);

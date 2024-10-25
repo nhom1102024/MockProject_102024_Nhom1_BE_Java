@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.be.dto.EmployeeDTO;
 import com.be.model.Employee;
+import com.be.model.EmployeeEntity;
 import com.be.service.EmployeeService;
 
 /**			
@@ -39,8 +40,8 @@ public class EmployeeController {
      * @return
      */  
      @PutMapping("/profile/{id}")
-     public Employee updateEmployee (@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO){
-         Employee employee = employeeService.updatEmployeeProfile(id, employeeDTO);
+     public EmployeeEntity updateEmployee (@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO){
+         EmployeeEntity employee = employeeService.updatEmployeeProfile(id, employeeDTO);
          return employee;
      }
 }

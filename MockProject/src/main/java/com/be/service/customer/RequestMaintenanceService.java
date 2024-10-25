@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 import com.be.dto.customer.RequestMaintenanceDTO;
 import com.be.model.Customer;
+import com.be.model.CustomerEntity;
 import com.be.model.Report;
 import com.be.repository.CustomerRepository;
 import com.be.repository.ReportRepository;
@@ -41,7 +42,7 @@ public class RequestMaintenanceService {
      * @param requestMaintenanceDTO
      */
     public void createMaintenanceRequest(Integer customerId, RequestMaintenanceDTO requestMaintenanceDTO) {
-        Customer customer = customerRepository.findById(customerId)
+        CustomerEntity customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
 
         Report newReport = new Report();

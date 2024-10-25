@@ -41,7 +41,7 @@ public class Bill {
     @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "FK_bill_customer"))
 
 
-    private Customer customer;
+    private CustomerEntity customer;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
@@ -50,11 +50,11 @@ public class Bill {
     @OneToMany(mappedBy = "bill")
     private List<PaymentHistory> paymentHistories;
 
-    public Customer getCustomer() {
+    public CustomerEntity getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerEntity customer) {
         this.customer = customer;
     }
 
